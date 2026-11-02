@@ -19,6 +19,13 @@
             text-align: left;
         }
         a { color: #58a6ff; text-decoration: none; }
+        
+        :root { --bg: #0d1117; --text: #00ff66; --box: #161b22; }
+        [data-theme="light"] { --bg: #f0f2f5; --text: #0f172a; --box: #ffffff; }
+        
+        body { background-color: var(--bg); color: var(--text); font-family: monospace; padding: 40px; }
+        .console { background-color: var(--box); border: 1px solid #30363d; padding: 20px; border-radius: 6px; }
+
     </style>
 </head>
 <body>
@@ -30,5 +37,12 @@
     </div>
     <br>
     <a href="index.html">← Back to Main Gate</a>
+        <script>
+        // Check the vault instantly when logs load to match the main page theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.setAttribute('data-theme', 'light');
+        }
+    </script>
+
 </body>
 </html>
