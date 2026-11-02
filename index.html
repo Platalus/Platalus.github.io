@@ -3,97 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My First Website</title>
+    <title>Interactive Security Portfolio</title>
     <style>
-        /* This is the CSS section */
+        :root {
+            --bg-color: #1a1a1a;
+            --container-bg: #222222;
+            --text-color: #ffffff;
+            --sub-text: #cccccc;
+            --shadow: rgba(0, 0, 0, 0.5);
+        }
+
+        /* The light mode color palette */
+        [data-theme="light"] {
+            --bg-color: #f0f2f5;
+            --container-bg: #ffffff;
+            --text-color: #0f172a;
+            --sub-text: #4b5563;
+            --shadow: rgba(0, 0, 0, 0.05);
+        }
         body {
-            background-color: #1a1a1a; /* Changes background to dark grey */
-            color: #ffffff;            /* Changes main text to white */
+            background-color: var(--bg-color);
+            color: var(--text-color);
             font-family: 'Segoe UI', sans-serif;
             text-align: center;
             padding-top: 50px;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        /* The Main Container (The Fortress Layout) */
         .container {
             max-width: 800px;
             margin: 0 auto;
-            background-color: #222222; /* Changed to dark theme grey to fit your background */
+            background-color: var(--container-bg);
             padding: 40px;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 20px var(--shadow);
             animation: fadeUp 1s ease-out forwards;
+            transition: background-color 0.3s ease;
         }
 
         h1 {
-            color: #00ff66;            /* Changes the main title to hacker green */
+            color: #00ff66;
             font-size: 3rem;
-            text-shadow: 0 0 10px rgba(0, 255, 102, 0.3); /* Adds a slight glow */
+            text-shadow: 0 0 10px rgba(0, 255, 102, 0.3);
             margin-bottom: 10px;
         }
 
         h2 {
-            color: #00bcff;            /* A cool blue color for the sub-heading */
+            color: #00bcff;
             font-size: 1.5rem;
             margin-bottom: 30px;
         }
 
         p {
-            color: #cccccc;            /* Makes the paragraph text slightly softer grey */
+            color: var(--sub-text);
             font-size: 1.2rem;
             margin-bottom: 20px;
         }
 
-        /* Styled button look for your links */
+        /* Interactive Buttons */
         .btn-link {
             display: inline-block;
-            background-color: #ffcc00;  /* Bright yellow button */
-            color: #1a1a1a;            /* Dark text for readability */
+            background-color: #ffcc00;
+            color: #1a1a1a;
             padding: 10px 20px;
             border-radius: 6px;
             text-decoration: none;
             font-weight: bold;
             margin: 10px;
-            transition: transform 0.2s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+            transition: transform 0.2s ease, background-color 0.2s ease;
         }
 
         .btn-link:hover {
-            transform: scale(1.05);    /* Slightly pops up when hovered */
+            transform: scale(1.05);
+        }
+
+        .btn-danger {
+            background-color: #ff3333;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background-color: #cc0000;
         }
 
         img {
             margin-top: 20px;
             margin-bottom: 20px;
-            border: 2px solid #00ff66; /* Adds a green border around the image */
-            border-radius: 10px;       /* Rounds the corners of the image */
+            border: 2px solid #00ff66;
+            border-radius: 10px;
         }
 
         @keyframes fadeUp {
-            0% {
-                opacity: 0;             /* Completely invisible */
-                transform: translateY(20px); /* Pushed down slightly */
-            }
-            100% {
-                opacity: 1;             /* Fully visible */
-                transform: translateY(0);    /* Snapped back to its perfect position */
-            }
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
+
     <div class="container">
+        <!-- Interactive Theme Switcher Button -->
+        <button class="btn-link" id="themeToggle">Toggle Light Mode</button>
 
         <h1>Welcome to My Website!</h1>
-        <h2>Phase 1: Foundation Building</h2>
+        <h2>Phase 2: Interactive Controls</h2>
         
         <img src="https://icons8.com" alt="Secure Padlock Icon">
         
         <br>
         <a class="btn-link" href="logs.html">Access Secret Logs</a>
-       
-        <p>Check out my training ground at <a class="btn-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a> </p>
-
+        
+        <!-- Interactive Security Alert Button -->
+        <button class="btn-link btn-danger" id="alertBtn">Trigger Breach Alert</button>
+        
+        <p>Check out my training ground at <a class="btn-link" href="https://github.com" target="_blank" rel="noopener noreferrer">GitHub</a>.</p>
     </div>
+    
+    <script>
+        // 1. Theme Toggle Logic
+        const themeToggle = document.getElementById('themeToggle');
+        themeToggle.addEventListener('click', () => {
+            // Check current theme state
+            const currentTheme = document.body.getAttribute('data-theme');
+            
+            if (currentTheme === 'light') {
+                document.body.removeAttribute('data-theme');
+                themeToggle.textContent = 'Toggle Light Mode';
+            } else {
+                document.body.setAttribute('data-theme', 'light');
+                themeToggle.textContent = 'Toggle Dark Mode';
+            }
+        });
+        const alertBtn = document.getElementById('alertBtn');
+        alertBtn.addEventListener('click', () => {
+            alert("⚠️ SECURITY WARNING: Simulated intrusion attempt blocked by fortress protocols!");
+        });
+    </script>
 
 </body>
 </html>
